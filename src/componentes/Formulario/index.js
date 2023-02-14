@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Botao from '../Botao'
 import CampoTexto from '../CampoTexto'
 import ListaSuspensa from '../ListaSuspensa'
@@ -5,33 +6,49 @@ import './Formulario.css'
 
 const Formulario = () => {
 
-    const times = [
-        'Programação',
-        'Front-End',
-        'Data Science',
-        'Devops',
-        'UX',
-        'Mobile'
-    ]
+    const times = [ 'Programação', 'Front-End', 'Data Science', 'Devops', 'UX', 'Mobile']
+
+    const [nome, setNome] = useState('')
+    const [cargo, setCargo] = useState('')
+    const [imagem, setImagem] = useState('')
 
     const aoSalvar = (evento) => {
         evento.preventDefault()
-        console.log("Form foi submetido")
+        console.log("Form foi submetido", nome, cargo, imagem)
     }
 
     return (
+
         <section className='formulario'>
             <form onSubmit={aoSalvar}>
                 <h2>Preencha os dados para criar os cards</h2>
-                <CampoTexto obg={true} label="Nome" placeholder="o seu nome" />
-                <CampoTexto obg={true} label="Cargo" placeholder="o seu cargo" />
-                <CampoTexto label="Imagem" placeholder="o endereço da imagem" />
+                <CampoTexto 
+                    obg={true} 
+                    label="Nome" 
+                    placeholder="o seu nome" 
+                    valor={nome}
+                    aoAlterado={valor => setNome(valor)}
+                />
+                <CampoTexto 
+                    obg={true} 
+                    label="Cargo" 
+                    placeholder="o seu cargo" 
+                    valor={cargo}
+                    aoAlterado={valor => setCargo(valor)}
+                />
+                <CampoTexto 
+                    label="Imagem"
+                    placeholder="o endereço da imagem" 
+                    valor={imagem}
+                    aoAlterado={valor => setImagem(valor)}
+                />
                 <ListaSuspensa obg={true} label="Time" itens={times} placeholder="Selecione a Categoria"/>
                 <Botao>
                     Criar Card
                 </Botao>
             </form>
         </section>
+
     )
 }
 
