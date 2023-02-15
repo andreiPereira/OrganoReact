@@ -10,7 +10,7 @@ function App() {
     setColaboradores([...colaboradores, colaborador])
     console.log(colaboradores)
   }
-
+ 
   return (
     <div className="App">
       <Banner />
